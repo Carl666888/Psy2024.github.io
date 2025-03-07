@@ -1,0 +1,22 @@
+name: Auto Index
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate Index
+        run: |
+          echo "# 日志总览" > index.md
+          echo "## 按日期排序" >> index.md
+          find _posts -name "*.md" | sort -r | while read file; do
+            date=$(basename $file .md)
+            echo "- [$date]($file)" >> index.md
+          done
+      - name: Commit Index
+        run: |
+          git config --global user.email "auto@github.com"
+          git config --global user.name "Index Bot"
+          git add index.md
+          git commit -m "Auto update index"
+          git push
