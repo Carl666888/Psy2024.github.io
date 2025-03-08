@@ -7,7 +7,7 @@
 
 
 ## 🎯 小成就和里程碑
-- [ministar](37.md)
+- [ministar](mind.md)
 
 
 
